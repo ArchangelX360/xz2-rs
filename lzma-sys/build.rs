@@ -18,9 +18,9 @@ fn main() {
     //
     // Otherwise check the system to see if it has an lzma library already
     // installed that we can use.
-    if !want_static && !msvc && pkg_config::probe_library("liblzma").is_ok() {
-        return;
-    }
+    // if !want_static && !msvc && pkg_config::probe_library("liblzma").is_ok() {
+    //     return;
+    // }
 
     let out_dir = env::var("OUT_DIR").unwrap();
     println!("cargo:root={}", out_dir);
@@ -53,23 +53,18 @@ fn main() {
         .files(src_files)
         // all C preproc defines are in `./config.h`
         .define("HAVE_CONFIG_H", "1")
-        .include("xz-5.2/src/liblzma/api")
-        .include("xz-5.2/src/liblzma/lzma")
-        .include("xz-5.2/src/liblzma/lz")
-        .include("xz-5.2/src/liblzma/check")
-        .include("xz-5.2/src/liblzma/simple")
-        .include("xz-5.2/src/liblzma/delta")
-        .include("xz-5.2/src/liblzma/common")
-        .include("xz-5.2/src/liblzma/rangecoder")
-        .include("xz-5.2/src/common")
-        .include("conf")
-        .include(env::current_dir().unwrap());
+        // .include("xz-5.2/src/liblzma/api")
+        // .include("xz-5.2/src/liblzma/lzma")
+        // .include("xz-5.2/src/liblzma/lz")
+        // .include("xz-5.2/src/liblzma/check")
+        // .include("xz-5.2/src/liblzma/simple")
+        // .include("xz-5.2/src/liblzma/delta")
+        // .include("xz-5.2/src/liblzma/common")
+        // .include("xz-5.2/src/liblzma/rangecoder")
+        // .include("xz-5.2/src/common")
+        // .include("conf2")
+    ;
 
-    let paths = fs::read_dir("conf").unwrap();
-    println!("LIST");
-    for path in paths {
-        println!("Name: {}", path.unwrap().path().display())
-    }
     let paths2 = fs::read_dir(env::current_dir().unwrap()).unwrap();
     println!("LIST2");
     for path2 in paths2 {

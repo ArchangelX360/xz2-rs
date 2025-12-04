@@ -62,7 +62,18 @@ fn main() {
         .include("xz-5.2/src/liblzma/common")
         .include("xz-5.2/src/liblzma/rangecoder")
         .include("xz-5.2/src/common")
-        .include("xz-5.2/..");
+        .include(".");
+
+    let paths = fs::read_dir(".").unwrap();
+    println!("LIST");
+    for path in paths {
+        println!("Name: {}", path.unwrap().path().display())
+    }
+    let paths2 = fs::read_dir(env::current_dir().unwrap()).unwrap();
+    println!("LIST2");
+    for path2 in paths2 {
+        println!("Name: {}", path2.unwrap().path().display())
+    }
 
     if !target.ends_with("msvc") {
         build.flag("-std=c99").flag("-pthread");

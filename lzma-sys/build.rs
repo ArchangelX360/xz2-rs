@@ -52,7 +52,7 @@ fn main() {
     build
         .files(src_files)
         // all C preproc defines are in `./config.h`
-        .define("HAVE_CONFIG_H", "0")
+        .define("HAVE_CONFIG_H", "1")
         .include("xz-5.2/src/liblzma/api")
         .include("xz-5.2/src/liblzma/lzma")
         .include("xz-5.2/src/liblzma/lz")
@@ -62,10 +62,10 @@ fn main() {
         .include("xz-5.2/src/liblzma/common")
         .include("xz-5.2/src/liblzma/rangecoder")
         .include("xz-5.2/src/common")
-        .include(env::current_dir().unwrap())
-        .include(".");
+        .include("conf")
+        .include(env::current_dir().unwrap());
 
-    let paths = fs::read_dir(".").unwrap();
+    let paths = fs::read_dir("conf").unwrap();
     println!("LIST");
     for path in paths {
         println!("Name: {}", path.unwrap().path().display())

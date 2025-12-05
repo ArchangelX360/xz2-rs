@@ -49,9 +49,10 @@ fn main() {
 
     let mut build = cc::Build::new();
 
-    let curr_dir = env::current_dir().unwrap();
+    let curr_dir = PathBuf::from("/Users/titouan.bion/Developer/xz2-rs/lzma-sys");
     build
         .files(src_files)
+        .flag("-v")
         // all C preproc defines are in `./config.h`
         .define("HAVE_CONFIG_H", "1")
         .include(curr_dir.join("xz-5.2/src/liblzma/api").to_str().unwrap())

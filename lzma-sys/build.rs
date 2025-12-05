@@ -49,23 +49,23 @@ fn main() {
 
     let mut build = cc::Build::new();
 
+    let curr_dir = env::current_dir().unwrap();
     build
         .files(src_files)
         // all C preproc defines are in `./config.h`
         .define("HAVE_CONFIG_H", "1")
-        .include("xz-5.2/src/liblzma/api")
-        .include("xz-5.2/src/liblzma/lzma")
-        .include("xz-5.2/src/liblzma/lz")
-        .include("xz-5.2/src/liblzma/check")
-        .include("xz-5.2/src/liblzma/simple")
-        .include("xz-5.2/src/liblzma/delta")
-        .include("xz-5.2/src/liblzma/common")
-        .include("xz-5.2/src/liblzma/rangecoder")
-        .include("xz-5.2/src/common")
-        .include("conf")
-    ;
+        .include(curr_dir.join("xz-5.2/src/liblzma/api").to_str().unwrap())
+        .include(curr_dir.join("xz-5.2/src/liblzma/lzma").to_str().unwrap())
+        .include(curr_dir.join("xz-5.2/src/liblzma/lz").to_str().unwrap())
+        .include(curr_dir.join("xz-5.2/src/liblzma/check").to_str().unwrap())
+        .include(curr_dir.join("xz-5.2/src/liblzma/simple").to_str().unwrap())
+        .include(curr_dir.join("xz-5.2/src/liblzma/delta").to_str().unwrap())
+        .include(curr_dir.join("xz-5.2/src/liblzma/common").to_str().unwrap())
+        .include(curr_dir.join("xz-5.2/src/liblzma/rangecoder").to_str().unwrap())
+        .include(curr_dir.join("xz-5.2/src/common").to_str().unwrap())
+        .include(&curr_dir);
 
-    let paths2 = fs::read_dir(env::current_dir().unwrap()).unwrap();
+    let paths2 = fs::read_dir(curr_dir).unwrap();
     println!("LIST2");
     for path2 in paths2 {
         println!("Name: {}", path2.unwrap().path().display())
